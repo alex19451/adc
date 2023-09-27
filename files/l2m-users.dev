@@ -1,0 +1,97 @@
+{
+    "updated": 1679016676,
+    "users": [
+        {
+            "user": "vasya",
+            "pass": "55d1c469ac36472e10e6fb1f89ed4927cd28abb995c2536e5d7329d70cd57d34",
+            "enabled": "false",
+            "cities": {
+                "permit": [
+                    "rostov",
+                    "lon"
+                ],
+                "deny": [
+                    "chel",
+                    "volgograd"
+                ]
+            },
+            "src_addr": [
+                "10.33.55.66"
+            ],
+            "endpoints": {
+                "permit": [
+                    "v2"
+                ],
+                "deny": [
+                    "v2"
+                ],
+                "v2": {
+                    "ro_methods": {
+                        "permit": [
+                            "get_vlan_db",
+                            "get_port_mode",
+                            "all"
+                        ],
+                        "deny": [
+                            "get_vlan_db",
+                            "get_port_mode"
+                        ]
+                    },
+                    "rw_methods": {
+                        "permit": [
+                            "get_vlan_db",
+                            "get_speed",
+                            "check_ipv6"
+                        ],
+                        "deny": [
+                            "get_port_mode"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "user": "sasas",
+            "pass": "7d4d6aca6c20c63cda69bfdd8574aa915d993f01e3e33d52069daf8e06456dd3",
+            "enabled": "false",
+            "cities": {
+                "permit": [
+                    "volgograd",
+                    "izhevsk"
+                ],
+                "deny": [
+                    "penza"
+                ]
+            },
+            "src_addr": [
+                "10.5.5.5"
+            ],
+            "endpoints": {
+                "permit": [
+                    "v2"
+                ],
+                "deny": [
+                    "v2"
+                ],
+                "v2": {
+                    "ro_methods": {
+                        "permit": [
+                            "all"
+                        ],
+                        "deny": [
+                            "all"
+                        ]
+                    },
+                    "rw_methods": {
+                        "permit": [
+                            "all"
+                        ],
+                        "deny": [
+                            "all"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

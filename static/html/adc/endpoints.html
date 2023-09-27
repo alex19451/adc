@@ -1,0 +1,43 @@
+{% extends "static/html/base.html" %}
+{% block northbound_system %}
+<ul class="nav navbar-nav ms-auto">
+  <li>{{ api_url }}</li>
+</ul>
+{% endblock %}
+{% block log %}
+<li class="nav-item">
+  <a href="/log" class="nav-link">Log</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="m-4">
+  <form id="add_endpoint" method="post">
+  <h5>Add endpoint:</h5>
+  <div class="input-group mb-3">
+    <input class="form-control-sm" id="endpoint_name" name="endpoint_name"></input>
+    <button type="submit" class="btn btn-outline-secondary" name="add_endpoint" value="yes">Add</button>
+  </div>
+  </form>
+  <h5>Directory of cities:</h5>
+  <table class="table table-hover table-responsive table-sm table-bordered">
+    <thead>
+      <td>Name</td>
+      <td>Delete</td>
+    </thead>
+    {% for endpoint in endpoints.get("visible") %}
+    <tr">
+      <td><input type="text" id="endpoint_id" name="endpoint_name" value="{{ endpoint }}" class="form-control form-control-sm" readonly></td>
+    </tr>
+    {% endfor %}
+    {% for endpoint in endpoints.get("changeable") %}
+    <form id="delete_endpoint" method="POST">
+      <tr>
+        <td><input type="text" id="endpoint_id" name="endpoint_name" value="{{ endpoint }}" class="form-control form-control-sm" readonly></td>
+        <td><button type="submit" onclick="return myConfirm();" id="delete_endpoint" name="delete_endpoint" class="btn btn-sm btn-outline-secondary" value="yes">Delete</button></td>
+      </tr>
+    </form>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

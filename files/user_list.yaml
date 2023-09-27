@@ -1,0 +1,62 @@
+updated: 1679016676
+users:
+- cities:
+    deny:
+    - chel
+    - volgograd
+    permit:
+    - rostov
+    - lon
+  enabled: 'false'
+  endpoints:
+    deny:
+    - v2
+    permit:
+    - v2
+    v2:
+      ro_methods:
+        deny:
+        - get_vlan_db
+        - get_port_mode
+        permit:
+        - get_vlan_db
+        - get_port_mode
+        - all
+      rw_methods:
+        deny:
+        - get_port_mode
+        permit:
+        - get_vlan_db
+        - get_speed
+        - check_ipv6
+  pass: 55d1c469ac36472e10e6fb1f89ed4927cd28abb995c2536e5d7329d70cd57d34
+  src_addr:
+  - 10.33.55.66
+  user: vasya
+- cities:
+    deny:
+    - penza
+    permit:
+    - volgograd
+    - izhevsk
+  enabled: 'false'
+  endpoints:
+    deny:
+    - v2
+    permit:
+    - v2
+    v2:
+      ro_methods:
+        deny:
+        - all
+        permit:
+        - all
+      rw_methods:
+        deny:
+        - all
+        permit:
+        - all
+  pass: 7d4d6aca6c20c63cda69bfdd8574aa915d993f01e3e33d52069daf8e06456dd3
+  src_addr:
+  - 10.5.5.5
+  user: sasas

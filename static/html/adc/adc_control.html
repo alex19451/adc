@@ -1,0 +1,118 @@
+{% extends "static/html/base.html" %}
+{% block northbound_system %}
+<ul class="nav navbar-nav ms-auto">
+  <li>{{ api_url }}</li>
+</ul>
+<h5>Current endpoint: {{file_name}}</h5>
+{% endblock %}
+{% block log %}
+<li class="nav-item">
+  <a href="/log" class="nav-link">Log</a>
+</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="m-4">
+  <div class="input-group"><br/>
+    <h5>ADC Access control &emsp;</h5>
+    <form id="sync" method="POST">
+      <button onclick="return myConfirm();" type="submit" name="synchronization" class="btn btn-outline-secondary float-left" value="synchronization">Synchronization</button>
+    </form>
+    <h5> &ensp;&ensp;&ensp;&ensp; reference: &ensp;</h5>
+    <form id="refer" method="POST">
+      <button type="submit" name="report_cities" class="btn btn-outline-secondary float-left" value="report_cities">Cities</button>
+      <button type="submit" name="report_endpoints" class="btn btn-outline-secondary float-left" value="report_endpoints">Endpoints</button>
+      <button type="submit" name="report_methods" class="btn btn-outline-secondary float-left" value="report_methods">Methods</button>
+    </form>
+      <h5> &ensp; Environment: &ensp;</h5>
+      <form id="environment" method="POST">
+      <select id="environment" name="env_name" class="form-select-sm" >
+        {% for item in environments %}
+        {% if file_name==item %}
+          <option selected>{{file_name}}</option>
+        {% else %}
+          <option>{{item}}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+        <button type="submit" name="change_enviroment" class="btn btn-outline-secondary" value="yes">Change</button>
+      </form>
+    </div>
+  </div>
+  </br>
+  <div class="container-fluid">
+    <div class="card-body">
+    {% if deploy_status is defined and deploy_status == "OK" %}
+        <p class="text-center text-success">Deploy users successfully</p>
+    {% elif deploy_status is defined and deploy_status == "NOT OK" %}
+        <p class="text-center text-danger">Deploy users error</p>
+    {% elif deploy_status is defined and deploy_status == "SKIPPED" %}
+        <p class="text-center text-success">Deploy users skipped</p>
+    {% endif %}
+  </div>
+    <table class="formdata table table-hover table-responsive table-sm table-bordered counter-table counter-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>enabled</th>
+          <th>User</th>
+          <th>Pass</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+        <tbody>
+          {% for item in users %}
+          <form id="main_users" method="POST">
+          {% if item['enabled'] == 'true' %}
+            {% set checked= 'checked' %}
+          {% endif %}
+            <tr>
+			        <td>
+			        	<div class="form-check form-switch">
+			        	  <input   name ="user_status" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  {{ checked }} >
+			        	</div>
+			        </td>
+              <td><input class="form-control-plaintext" id="user_name" name="user_name" value={{ item['user']}} readonly></input></td>
+              <td><input type="password" class="form-control-plaintext" id="user_pass" name="user_pass" value='{{ (item['pass'])}}' readonly></input></td>
+              <td><input class="form-control-plaintext" id="user_desc" name="user_desc" value='{{ (item['description'])}}' readonly></input></td>
+			        <td><button onclick="return myConfirm();" id="delete_user_id" name="delete_user" class="btn btn-sm btn-outline-secondary" value="yes">delete</button></td>
+              <td><button type="submit" name="edit_user" class="btn btn-sm btn-outline-secondary" value="yes">edit</button></td>
+              <td><button type="submit" name="view_user" class="btn btn-sm btn-outline-secondary" value="yes" >view</button></td>
+            </tr>
+          </form>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="input-group mb-3">
+      <form id="add_apply" method="POST">
+      <button class="btn btn-sm btn-outline-secondary" type="submit" name="apply_data" value="yes">Raw View</button>
+      <button class="btn btn-sm btn-outline-secondary" type="submit" name="add_user" value="yes">Add User</button>
+    </form>
+    </div>
+<script>
+    $(document).ready(function(){
+        $("input:checkbox").change(function() {
+            var user_name = $(this).closest('tr').find('input[name="user_name"]').val();
+            if($(this).is(":checked")){
+              var data = {"checkbox":"True", "name":user_name }
+            }
+            else {
+              var data = {"checkbox":"False","name":user_name}
+            }
+            $.ajax({
+                url: '/adc_control',
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: 'application/json; charset=utf-8',
+                processData: false
+            });
+        });
+    });
+</script>
+
+{% endblock %}

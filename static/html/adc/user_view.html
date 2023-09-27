@@ -1,0 +1,102 @@
+{% extends "static/html/base.html" %}
+{% block northbound_system %}
+<ul class="nav navbar-nav ms-auto">
+  <li>{{ api_url }}</li>
+</ul>
+{% endblock %}
+{% block log %}
+<li class="nav-item">
+  <a href="/log" class="nav-link">Log</a>
+</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="m-4">
+  <div class="container-fluid bg-light">
+    <form id="user_view_form" method="post" name="user_view_form">
+      <table class="formdata table table-hover table-responsive table-sm table-bordered">
+        <thead><td><b>Username:</b></td><td><b>Password</b></td><td><b>Src-address</b></td></thead>
+        <tr>
+          <td><input type="text" id="items_users" name="{{ user['user'] }}" value="{{ user['user'] }}" class="form-control form-control-sm" readonly></td>
+          <td><input type="password" id="item_pass" name="items_pass" value="{{ user['pass'] }}" class="form-control form-control-sm" readonly></td>
+          <td>
+            <select id="source_address" name="source_address" class="G7-countries" name="g7[]" multiple="multiple" style="width: 100%;" readonly>
+            {% for item in user['src_addr'] %}
+              <option>{{item}}</option>
+            {% endfor %}
+            </select>
+          </td>
+        </tr>
+        <thead><td><b>Cities:</b><br>permit</td></td><td><b>Endpoints:</b><br>permit</td><td><b>Method Ro:</b><br>permit</td><td><b>Method Rw:</b><br>permit</td>
+        <tr>
+          <td>
+            <select id="city_permit" name="city_permit" class="G7-countries" name="g7[]" multiple="multiple" style="width: 100%;" readonly>
+            {% for item in user['cities']['permit'] %}
+              <option>{{item}}</option>
+            {% endfor %}
+            </select>
+          </td>
+          <td>
+            <select id="endpoint_permit" name="endpoint_permit" class="G7-countries" name="g7[]" multiple="multiple" style="width: 100%;" readonly>
+            {% for item in user['endpoints']['permit'] %}
+              <option >{{item}}</option>
+            {% endfor %}
+            </select>
+          </td>
+          <td>
+            <select id="method_ro_permit" name="method_ro_permit" class="G7-countries" name="g7[]" multiple="multiple" style="width: 100%;" readonly>
+              {% for item in user['endpoints']["v2"]["ro_methods"]["permit"] %}
+                <option>{{item}}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <select id="method_rw_permit" name="method_rw_permit" class="G7-countries" name="g7[]" multiple="multiple" style="width: 100%;" readonly>
+              {% for item in user['endpoints']["v2"]["rw_methods"]["permit"] %}
+                <option>{{item}}</option>
+              {% endfor %}
+            </select>
+          </td>
+        <thead><td>deny</td><td>deny</td><td>deny</td><td>deny</td></thead>
+        <tr>
+          <td>
+            <select id="city_deny" name="city_deny" class="G7-countries" name="g7[]" multiple="multiple" style="width: 100%;" readonly>
+            {% for item in user['cities']['deny'] %}
+              <option>{{item}}</option>
+            {% endfor %}
+            </select>
+          </td>
+          <td>
+            <select id="endpoint_deny" name="endpoint_deny" class="G7-countries" name="g7[]" multiple="multiple" style="width: 100%;" readonly>
+            {% for item in user['endpoints']['deny'] %}
+              <option >{{item}}</option>
+            {% endfor %}
+            </select>
+          </td>
+          <td>
+            <select id="method_ro_deny" name="method_ro_deny" class="G7-countries" name="g7[]" multiple="multiple" style="width: 100%;" readonly>
+              {% for item in user['endpoints']["v2"]["ro_methods"]["deny"] %}
+                <option>{{item}}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <select id="method_rw_deny" name="method_rw_deny" class="G7-countries" name="g7[]" multiple="multiple" style="width: 100%;" readonly>
+              {% for item in user['endpoints']["v2"]["rw_methods"]["deny"] %}
+                <option>{{item}}</option>
+              {% endfor %}
+            </select>
+          </td>
+
+        </tr>
+        </tr>
+      </table>
+	  </form>
+  </div>
+  <div class="input-group mb-3">
+      <button class="btn btn-sm btn-outline-secondary" type="submit" name="cancel_view" value="yes" onclick="location.href = '/adc_control';">Cancel</button>
+  </div>
+</div>
+
+{% endblock %}

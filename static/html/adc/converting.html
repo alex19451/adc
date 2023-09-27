@@ -1,0 +1,44 @@
+{% extends "static/html/base.html" %}
+
+{% block log %}
+<li class="nav-item">
+  <a href="/log" class="nav-link">Log</a>
+</li>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="m-4">
+    <div class="input-group mb-3">
+      <h5>Convert l2m-user*.json on new format:</h5><br>
+        <table class="table table-hover table-sm table-bordered counter-table" id="users_table">
+        <thead><td>#</td><td style ="word-break:break-all;">File Name</td><td>Environment</td><td>Convert file</td><td>Delete</td></thead>
+        {% for file in users_files %}
+        <tr>
+          <td name="filename"><a href="{{ file.path }}"> {{ file.name }}</a></td>
+          <form action="" method="post">
+            <td>
+            <select name="upload_env_name" class="selectpicker form-control" data-live-search="true" name="api_url">
+              <option>l2m-users.dev</option>
+              <option>l2m-users.prod</option>
+          </select>
+          </td>
+            <td><button type="submit" name="convert_from_file" value="{{ file.name }}" class="btn btn-sm btn-outline-secondary float-right">Apply convert</button></td>
+          </form>
+          <form action="" method="post">
+            <td><button type="submit" name="delete_user_file" value="{{ file.name }}" class="btn btn-sm btn-outline-secondary float-right">Delete</button></td>
+          </form>
+        </tr>
+        {% endfor %}
+      </table>
+      <form form id="users_upload" enctype="multipart/form-data" method="post">
+        <div class="input-group custom-file-button">
+          <input type="file" class="form-control form-control-sm" name="users_upload" id="users_upload">
+          <input type="submit" value="Upload users file" class="btn btn-sm btn-outline-secondary"/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

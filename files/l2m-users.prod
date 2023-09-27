@@ -1,0 +1,96 @@
+{
+    "updated": 1679016676,
+    "users": [
+        {
+            "user": "qwq",
+            "pass": "8b3534a2a776f6bc2b4a2983f674648906af1afbbf05c552dcdef0445848f3ad",
+            "cities": {
+                "permit": [
+                    "volgograd"
+                ],
+                "deny": [
+                    "barnaul",
+                    "voronezh",
+                    "izhevsk",
+                    "yola"
+                ]
+            },
+            "src_addr": [
+                "10.5.5.5"
+            ],
+            "endpoints": {
+                "permit": [
+                    "v2"
+                ],
+                "deny": [
+                    "v2"
+                ],
+                "v2": {
+                    "ro_methods": {
+                        "permit": [
+                            "all"
+                        ],
+                        "deny": [
+                            "all"
+                        ]
+                    },
+                    "rw_methods": {
+                        "permit": [
+                            "all"
+                        ],
+                        "deny": [
+                            "all"
+                        ]
+                    }
+                }
+            },
+            "enabled": "true"
+        },
+        {
+            "user": "vasya",
+            "pass": "975a0d1241ba08747e57c2ab3d9c0567941a4edd21f11b80901313f59c65f922",
+            "enabled": "true",
+            "cities": {
+                "permit": [
+                    "volgograd",
+                    "izhevsk",
+                    "yola",
+                    "chel"
+                ],
+                "deny": [
+                    "volgograd",
+                    "barnaul"
+                ]
+            },
+            "src_addr": [
+                "10.5.5.5"
+            ],
+            "endpoints": {
+                "permit": [
+                    "v2"
+                ],
+                "deny": [
+                    "v2"
+                ],
+                "v2": {
+                    "ro_methods": {
+                        "permit": [
+                            "all"
+                        ],
+                        "deny": [
+                            "all"
+                        ]
+                    },
+                    "rw_methods": {
+                        "permit": [
+                            "all"
+                        ],
+                        "deny": [
+                            "all"
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

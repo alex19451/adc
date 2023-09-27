@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+    nginx:
+        build:
+            context: ./nginx/
+            dockerfile: Dockerfile
+        container_name: nginx
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+        depends_on:
+            - webapp
+        networks:
+            - my-network
+        ports:
+            - 80:80
+            - 443:443
+    webapp:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        container_name: adc_users
+        volumes:
+           - ./files/:/app/files/
+           - ./vars/:/app/vars/
+        networks:
+            my-network:
+                aliases:
+                    - webapp
+        ports:
+            - 8080:8080
+
+networks:
+    my-network:

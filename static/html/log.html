@@ -1,0 +1,13 @@
+{% extends "static/html/base.html" %}
+
+{% block content %}
+  <div class="m-4">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-fluid">
+        {% for log_str in data %}
+          {{log_str}}<br>
+        {% endfor %}
+        </div>
+    </nav>
+  </div>
+{% endblock %}
